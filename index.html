@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <!-- TODO: Initialize our app -->
-<body>
+<body ng-app="TodoApp">
   <!-- TODO: Add a nav controller -->
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" ng-controller="NavCtrl">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -22,15 +22,15 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <!-- TODO: Use Angular to loop through nav items -->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"></a></li>
+        <ul class="nav navbar-nav navbar-right" ng-repeat="item in navItems">
+          <li><a href="#" ng-bind="item.name"></a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 
   <!-- TODO: Add a controller for our todo list -->
-  <div>
+  <div ng-controller="TodoCtrl">
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3">
         <!-- Let's call a js function from our HTML. wat? -->
@@ -41,7 +41,7 @@
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1 main-container">
         <!-- TODO: Add boolean for hide/show -->
-        <div class="col-xs-12">
+        <div class="col-xs-12" ng-show="showListView">
           <h1>Todo List</h1>
           <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
@@ -55,20 +55,20 @@
             </div>
           </div>
           <!-- TODO: Repeat over our todo list items and setup filtering by search term. Easy peasy -->
-          <div>
+          <div ng-repeat="item in items">
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="col-xs-1"><input type="checkbox" name=""/></div>
-                <div class="col-xs-7"></div>
-                <div class="col-xs-2"></div>
-                <div class="col-xs-1"></div>
+                <div class="col-xs-7" ng-bind="item.task + ', ' + item.dueDate"></div>
+                <div class="col-xs-2" ng-bind="item.dueDate"></div>
+                <div class="col-xs-1" ng-bind="item.assignedTo"></div>
                 <div class="col-xs-1"><button class="btn btn-danger">X</button></div>
               </div>
             </div>
           </div>
         </div>
         <!-- TODO: Hide/show magic once more -->
-        <div class="col-xs-12">
+        <div class="col-xs-12" ng-show="!showListView">
           <h1>New Todo</h1>
           <form>
             <div class="form-group">
