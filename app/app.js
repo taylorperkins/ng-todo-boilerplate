@@ -53,5 +53,31 @@ app.controller("TodoCtrl", ($scope) => {
 	    dependencies: "hammock, silence"
 	  }
 	];
+
+	s.newItem = () => s.showListView = false;
+	s.allItems = () => s.showListView = true;
+
+	s.addNewItem = () => {
+		console.log("add new item");
+		s.newTask.isCompleted = false;
+		s.newTask.id = s.items.length;
+
+		s.items.push(s.newTask);
+		s.newTask = {};
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
